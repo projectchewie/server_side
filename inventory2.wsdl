@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<definitions name='Inventory'
+  targetNamespace='urn:soaptest'
+  xmlns:tns='urn:soaptest'
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+  xmlns='http://schemas.xmlsoap.org/wsdl/'>
+
+<message name='newUserRequest'>
+  <part name='id' type='xsd:string'/>
+  <part name='firstName' type= 'xsd:string'/>
+  <part name='lastName' type= 'xsd:string'/>
+  <part name='address' type= 'xsd:string'/>
+  <part name='phone' type= 'xsd:string'/>
+  <part name='email' type= 'xsd:string'/>
+  <part name='radius' type= 'xsd:string'/>
+  <part name='timeDelay' type= 'xsd:string'/>
+  <part name='host_desire' type= 'xsd:string'/>
+  <part name='host' type= 'xsd:string'/>
+</message>
+<message name='newUserResponse'>
+  <part name='Result' type='xsd:integer'/>
+</message>
+
+
+<message name='getUserRequest'>
+  <part name='id' type='xsd:string'/>
+</message>
+<message name='getUserResponse'>
+  <part name='Result' type='xsd:integer'/>
+</message>
+
+
+<portType name='InventoryPortType'>
+  <operation name='newUser'>
+    <input message='tns:newUserRequest'/>
+    <output message='tns:newUserResponse'/>
+  </operation>
+  <operation name='getUser'>
+    <input message='tns:getUserRequest'/>
+    <output message='tns:getUserResponse'/>
+  </operation>
+</portType>
+
+<binding name='InventoryBinding' type='tns:InventoryPortType'>
+  <soap:binding style='rpc'
+    transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='newUser'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#newUser'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  <operation name='getUser'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getUser'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+</binding>
+
+<service name='InventoryService'>
+  <port name='InventoryPort' binding='InventoryBinding'>
+    <soap:address location='http://localhost:8888/test/wsdl/server2.php'/>
+  </port>
+</service>
+</definitions>
