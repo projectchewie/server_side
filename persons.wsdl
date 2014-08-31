@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<definitions name='Persons'
+  targetNamespace='urn:soaptest'
+  xmlns:tns='urn:soaptest'
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+  xmlns='http://schemas.xmlsoap.org/wsdl/'>
+
+<message name='newUserRequest'>
+  <part name='id' type='xsd:string'/>
+  <part name='firstName' type= 'xsd:string'/>
+  <part name='lastName' type= 'xsd:string'/>
+  <part name='address' type= 'xsd:string'/>
+  <part name='phone' type= 'xsd:string'/>
+  <part name='email' type= 'xsd:string'/>
+  <part name='radius' type= 'xsd:string'/>
+  <part name='timeDelay' type= 'xsd:string'/>
+  <part name='host_desire' type= 'xsd:string'/>
+  <part name='host' type= 'xsd:string'/>
+</message>
+
+
+<message name='existsUserRequest'>
+  <part name='id' type='xsd:string'/>
+</message>
+<message name='existsUserResponse'>
+  <part name='Result' type='xsd:integer'/>
+</message>
+<message name='updateUserRequest'>
+  <part name='id' type='xsd:string'/>
+  <part name='field' type='xsd:string'/>
+  <part name='entry' type='xsd:string'/>
+</message>
+<message name='getUserRequest'>
+  <part name='id' type='xsd:string'/>
+  <part name='field' type='xsd:string'/>
+</message>
+<message name='getUserResponse'>
+  <part name='Result' type='xsd:string'/>
+</message>
+
+
+
+
+
+
+
+<portType name='PersonsPortType'>
+  <operation name='newUser'>
+    <input message='tns:newUserRequest'/>
+  </operation>
+  <operation name= 'existsUser'>
+    <input message='tns:existsUserRequest'/>
+    <output message='tns:existsUserResponse'/>
+  </operation>
+  <operation name='updateUser'>
+    <input message='tns:updateUserRequest'/>
+  </operation>
+  <operation name='getUser'>
+    <input message='tns:getUserRequest'/>
+    <output message='tns:getUserResponse'/>
+  </operation>
+
+</portType>
+
+<binding name='PersonsBinding' type='tns:PersonsPortType'>
+  <soap:binding style='rpc'
+    transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='newUser'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#newUser'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  <operation name='existsUser'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#existsUser'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  <operation name='updateUser'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#updateUser'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  <operation name='getUser'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getUser'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+ 
+
+</binding>
+
+<service name='PersonsService'>
+  <port name='PersonsPort' binding='PersonsBinding'>
+    <soap:address location='http://localhost:8888/test/wsdl/server2.php'/>
+  </port>
+</service>
+</definitions>
