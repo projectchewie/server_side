@@ -20,8 +20,6 @@
   <part name='host_desire' type= 'xsd:string'/>
   <part name='host' type= 'xsd:string'/>
 </message>
-
-
 <message name='existsUserRequest'>
   <part name='id' type='xsd:string'/>
 </message>
@@ -40,10 +38,36 @@
 <message name='getUserResponse'>
   <part name='Result' type='xsd:string'/>
 </message>
-
-
-
-
+<message name='newCartRequest'>
+  <part name='id' type='xsd:string'/>
+  <part name='cart_id' type= 'xsd:string'/>
+  <part name='cartPrice' type= 'xsd:string'/>
+  <part name='num' type= 'xsd:string'/>
+  <part name='active' type= 'xsd:string'/>
+  <part name='aggregate' type= 'xsd:string'/>
+  <part name='aggId' type= 'xsd:string'/>
+</message>
+<message name='existsCartRequest'>
+  <part name='id' type='xsd:string'/>
+  <part name='cart_id' type='xsd:string'/>
+</message>
+<message name='existsCartResponse'>
+  <part name='Result' type='xsd:integer'/>
+</message>
+<message name='getCartRequest'>
+  <part name='id' type='xsd:string'/>
+  <part name='cart_id' type='xsd:string'/>
+  <part name='field' type='xsd:string'/>
+</message>
+<message name='getCartResponse'>
+  <part name='Result' type='xsd:integer'/>
+</message>
+<message name='updateCartRequest'>
+  <part name='id' type='xsd:string'/>
+  <part name='cart_id' type='xsd:string'/>
+  <part name='field' type='xsd:string'/>
+  <part name='entry' type='xsd:string'/>
+</message>
 
 
 
@@ -62,7 +86,20 @@
     <input message='tns:getUserRequest'/>
     <output message='tns:getUserResponse'/>
   </operation>
-
+  <operation name='newCart'>
+    <input message='tns:newCartRequest'/>
+  </operation>
+  <operation name= 'existsCart'>
+    <input message='tns:existsCartRequest'/>
+    <output message='tns:existsCartResponse'/>
+  </operation>
+  <operation name='getCart'>
+    <input message='tns:getCartRequest'/>
+    <output message='tns:getCartResponse'/>
+  </operation>
+  <operation name='updateCart'>
+    <input message='tns:updateCartRequest'/>
+  </operation>
 </portType>
 
 <binding name='PersonsBinding' type='tns:PersonsPortType'>
@@ -101,6 +138,17 @@
         encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
     </output>
   </operation>
+  <operation name='newCart'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#newCart'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
   <operation name='getUser'>
     <soap:operation soapAction='urn:xmethods-delayed-quotes#getUser'/>
     <input>
@@ -112,7 +160,39 @@
         encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
     </output>
   </operation>
- 
+  <operation name='existsCart'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#existsCart'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  <operation name='getCart'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#getCart'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  <operation name='updateCart'>
+    <soap:operation soapAction='urn:xmethods-delayed-quotes#updateCart'/>
+    <input>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
 
 </binding>
 
